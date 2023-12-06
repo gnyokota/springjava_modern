@@ -2,10 +2,8 @@ package com.modern.controller;
 
 
 import com.modern.model.Event;
-import com.modern.model.Organizer;
 import com.modern.model.Product;
 import com.modern.repository.EventRepository;
-import com.modern.repository.OrganizerRepository;
 import com.modern.repository.ProductRepository;
 import org.springframework.web.bind.annotation.*;
 
