@@ -3,6 +3,7 @@ package com.modern.controller;
 
 import com.modern.model.Event;
 import com.modern.model.Organizer;
+import com.modern.model.Product;
 import com.modern.repository.EventRepository;
 import com.modern.repository.OrganizerRepository;
 import com.modern.repository.ProductRepository;
@@ -13,32 +14,46 @@ import java.util.NoSuchElementException;
 
 @RestController
 public class EventController {
-    private final OrganizerRepository organizerRepository;
     private final EventRepository eventRepository;
     private final ProductRepository productRepository;
 
-    public EventController(OrganizerRepository organizerRepository,
-                           EventRepository eventRepository,
+    public EventController(EventRepository eventRepository,
                            ProductRepository productRepository) {
-        this.organizerRepository = organizerRepository;
         this.eventRepository = eventRepository;
         this.productRepository = productRepository;
     }
 
-    @RequestMapping("/organizers")
-    public List<Organizer> getOrganizers() {
-        return organizerRepository.findAll();
+    @PostMapping("/event")
+    public Event CreateEvents(@RequestBody Event event) {
+        return eventRepository.save(event);
     }
 
-    @RequestMapping("/events/{organizerId}")
-    public List<Event> getEventsByOrganizer(@PathVariable("organizerId") int organizerId) {
-        return eventRepository.findEventByOrganizerId(organizerId);
+    @GetMapping("/events")
+    public List<Event> getEvents() {
+        return eventRepository.findAll();
     }
 
-    @GetMapping("/events/{eventId}")
-    public Event getEventById(@PathVariable("eventId") int eventId) {
-        return eventRepository.findById(eventId).orElseThrow(
-                () -> new NoSuchElementException("Event with id " + eventId + " not found!")
+    @GetMapping("/event")
+    public Event getEventByName(@RequestParam("name") String name) {
+        return eventRepository.findEventByName(name).orElseThrow(
+                () -> new NoSuchElementException("Event with name " + name + " not found!")
+        );
+    }
+
+    @PostMapping("/products")
+    public Product createProducts(@RequestBody Product product) {
+        return productRepository.save(product);
+    }
+
+    @GetMapping("/products")
+    public List<Product> getProducts() {
+        return productRepository.findAll();
+    }
+
+    @GetMapping("/products/{id}")
+    public Product getProductByEventId(@PathVariable("id") String id) {
+        return productRepository.findById(id).orElseThrow(
+                () -> new NoSuchElementException("Product with id " + id + " not found!")
         );
     }
 }

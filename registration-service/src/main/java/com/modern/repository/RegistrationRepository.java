@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 ;import java.util.Optional;
 
-public interface RegistrationRepository extends MongoRepository<Registration, Integer> {
+public interface RegistrationRepository extends MongoRepository<Registration, String> {
 
     public Optional<Registration> findRegistrationByTicketCode(String ticketCode);
 }

@@ -1,12 +1,16 @@
 package com.modern.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.time.LocalDate;
 
+@Document
 public record Event(
-        int id,
+        @Id
+        String id,
         String name,
         Organizer organizer,
-        Venue venue,
         LocalDate startDate,
         LocalDate endDate
 ) {

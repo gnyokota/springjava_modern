@@ -13,7 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>spring</name>
-	<description>O&apos;rilley modern java spring tutorial</description>
+	<description>java spring boot 3 tutorial</description>
     <modules>
         <module>events-service</module>
 		<module>registration-service</module>
