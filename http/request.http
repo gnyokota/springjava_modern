@@ -1,7 +1,0 @@
-GET localhost:8081/events/1
-
-###
-GET localhost:8081/actuator/health
-
-###
-GET localhost:8082/actuator/health

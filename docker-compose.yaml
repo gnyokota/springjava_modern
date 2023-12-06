@@ -8,9 +8,26 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=secret
       - MONGO_INITDB_DATABASE=event_registration_db
     ports:
-      - 27017:27017
+      - "27017:27017"
     volumes:
       - mongodb_data_container:/data/db
+  events:
+    image: events-service
+    depends_on:
+      - mongodb_container
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+    ports:
+      - "8081:8081"
+  registration:
+    image: registration-service
+    depends_on:
+      - mongodb_container
+      - events
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+    ports:
+      - "8082:8082"
 
 volumes:
   mongodb_data_container:
